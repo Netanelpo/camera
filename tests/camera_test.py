@@ -1,3 +1,5 @@
+from time import sleep
+
 import numpy as np
 import pytest
 
@@ -21,6 +23,13 @@ def test_image_closed():
 def test_image_opened():
     camera = Camera()
     camera.open()
-    frame = next(camera.capture_image())
-    assert frame.shape == (1024, 1280, 1)
-    assert frame.dtype == np.uint16
+    frame1 = next(camera.capture_image())
+    assert frame1.shape == (1024, 1280, 1)
+    assert frame1.dtype == np.uint16
+
+    frame2 = next(camera.capture_image())
+    assert np.array_equal(frame1, frame2)
+
+    sleep(0.03)
+    frame3 = next(camera.capture_image())
+    assert not np.array_equal(frame1, frame3)
