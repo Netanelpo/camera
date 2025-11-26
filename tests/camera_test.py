@@ -3,7 +3,7 @@ from time import sleep
 import numpy as np
 import pytest
 
-from camera.camera import Camera
+from components.camera import Camera
 
 
 def test_close():
